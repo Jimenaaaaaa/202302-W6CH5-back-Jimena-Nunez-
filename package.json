@@ -9,7 +9,7 @@
     "start:mon": "cross-env PORT=3500 nodemon ./dist/index.js",
     "build": "tsc -w",
     "test:prod": "react-scripts test --watchAll --coverage --watchAll=false",
-    "test": "react-scripts test --coverage",
+    "test": "react-scripts test --coverage"
   },
   "author": "Jimena",
   "license": "ISC",
