@@ -5,10 +5,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./dist/index.js -w",
     "start:mon": "cross-env PORT=3500 nodemon ./dist/index.js",
-    "build": "tsc -w"
+    "build": "tsc -w",
+    "test:prod": "react-scripts test --watchAll --coverage --watchAll=false",
+    "test": "react-scripts test --coverage",
   },
   "author": "Jimena",
   "license": "ISC",
