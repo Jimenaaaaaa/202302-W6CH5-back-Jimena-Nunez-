@@ -8,8 +8,8 @@
     "start": "node ./dist/index.js -w",
     "start:mon": "cross-env PORT=3500 nodemon ./dist/index.js",
     "build": "tsc -w",
-    "test:prod": "react-scripts test --watchAll --coverage --watchAll=false",
-    "test": "react-scripts test --coverage"
+    "test": "jest --watchAll --coverage",
+    "test:prod": "jest --watchAll --coverage --watchAll=false"
   },
   "author": "Jimena",
   "license": "ISC",
