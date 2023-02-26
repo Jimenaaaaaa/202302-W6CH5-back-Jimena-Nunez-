@@ -19,5 +19,4 @@ app.use((_req, _resp, next) => {
   next();
 });
 
-app.use(cors(corsOptions));
 app.use('/dogs', dogsRouter);
