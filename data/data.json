@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "Freddy",
+    "breed": "galgo",
+    "weight": 10,
+    "is_good": true
+  },
+  { "id": 2, "name": "Aliki", "breed": "mixed", "weight": 35, "is_good": true },
+  {
+    "id": 3,
+    "name": "Olivo",
+    "breed": "podenco",
+    "weight": 15,
+    "is_good": false
+  },
+  { "id": 4, "name": "Bambu", "breed": "cat", "weight": 3, "is_good": false }
+]
