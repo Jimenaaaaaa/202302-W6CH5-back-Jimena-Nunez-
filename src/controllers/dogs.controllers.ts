@@ -1,59 +1,61 @@
-import { Response, Request } from 'express';
-import { DogsFileRepo } from '../repo/dogs.file.repo.js';
-
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-useless-constructor */
+import { Response, Request, NextFunction } from 'express';
+import { DogStructure } from '../entities/dog.model.copy.js';
+import { Repo } from '../repo/repo.interface.js';
+import createDebug from 'debug';
+const debug = createDebug('W6:controller');
 export class DogsController {
-  constructor(public repo: DogsFileRepo) {}
+  constructor(public repo: Repo<DogStructure>) {
+    debug('instantiate');
+  }
 
-  getAll(_req: Request, resp: Response) {
-    this.repo.read().then((data) => {
-      resp.json(data);
+  async getAll(_req: Request, resp: Response, next: NextFunction) {
+    try {
+      debug('getAll');
+      const data = await this.repo.query();
+      resp.json({
+        results: data,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async get(req: Request, resp: Response, next: NextFunction) {
+    try {
+      debug('get');
+      const data = await this.repo.queryId(req.params.id);
+      resp.json({
+        results: [data],
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async post(req: Request, resp: Response, next: NextFunction) {
+    const data = await this.repo.create(req.body);
+
+    resp.json({
+      results: data,
     });
   }
 
-  get(req: Request, resp: Response) {
-    const { id } = req.params;
-    this.repo
-      .readId(Number(id))
-      .then((data) => {
-        resp.json(data);
-      })
-      .catch((error) => {
-        resp.status(500).send(error.message);
-      });
+  async patch(req: Request, resp: Response, next: NextFunction) {
+    req.body.id = req.params.id ? req.params.id : req.body.id;
+    const data = await this.repo.update(req.body);
+
+    resp.json({
+      results: data,
+    });
   }
 
-  post(req: Request, resp: Response) {
-    const newDog = req.body;
-    this.repo
-      .write(newDog)
-      .then(() => {
-        resp.json('New pet added!');
-      })
-      .catch((error) => {
-        resp.status(500).send(error.message);
-      });
-  }
+  async delete(req: Request, resp: Response, next: NextFunction) {
+    this.repo.erase(req.params.id);
 
-  patch(req: Request, resp: Response) {
-    const newData = req.body;
-    this.repo
-      .update(newData)
-      .then(() => {
-        resp.json('Pet succesfully updated!');
-      })
-      .catch((error) => {
-        resp.status(500).send(error.message);
-      });
-  }
-
-  delete(req: Request, resp: Response) {
-    this.repo
-      .delete(Number(req.params.id))
-      .then(() => {
-        resp.json('Pet succesfully deleted.');
-      })
-      .catch((error) => {
-        resp.status(500).send(error.message);
-      });
+    resp.json({
+      results: [],
+    });
   }
 }
