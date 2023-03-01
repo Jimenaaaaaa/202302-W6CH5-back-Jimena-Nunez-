@@ -9,7 +9,7 @@
     "start:mon": "cross-env DEBUG=W6* PORT=3500 nodemon ./dist/index.js",
     "build": "tsc -w",
     "test": "jest --watchAll --coverage",
-    "test:prod": "jest --watchAll --coverage --watchAll=false --passWithNoTest"
+    "test:prod": "jest --watchAll --coverage --watchAll=false --passWithNoTests"
   },
   "author": "Jimena",
   "license": "ISC",
