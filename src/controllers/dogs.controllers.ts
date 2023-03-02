@@ -36,6 +36,9 @@ export class DogsController {
     } catch (error) {
       next(error);
     }
+    } catch (error) {
+      next(error);
+    }
   }
 
   async post(req: RequestPlus, resp: Response, next: NextFunction) {
