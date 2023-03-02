@@ -1,11 +1,11 @@
 /* eslint-disable new-cap */
 import { Router } from 'express';
 import { DogsController } from '../controllers/dogs.controllers.js';
-import { DogsFileRepo } from '../repo/dogs.file.repo.js';
+import { DogsMongoRepo } from '../repo/dogs.mongo.repo.js';
 
 export const dogsRouter = Router();
 
-const repo = new DogsFileRepo();
+const repo = new DogsMongoRepo();
 const controller = new DogsController(repo);
 
 dogsRouter.get('/', controller.getAll.bind(controller));
